@@ -1,0 +1,45 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - COMPASS_LLM_PROVIDER=${COMPASS_LLM_PROVIDER:-mock}
+      - COMPASS_ANTHROPIC_API_KEY=${COMPASS_ANTHROPIC_API_KEY:-}
+      - COMPASS_OPENAI_API_KEY=${COMPASS_OPENAI_API_KEY:-}
+      - COMPASS_ENVIRONMENT=docker-compose
+    volumes:
+      - compass-vector-store:/app/data/vector_store
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - backend
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+
+volumes:
+  compass-vector-store:

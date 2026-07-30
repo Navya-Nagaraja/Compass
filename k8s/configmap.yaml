@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: compass-config
+data:
+  COMPASS_LLM_PROVIDER: "mock"
+  COMPASS_ENVIRONMENT: "production"
+  COMPASS_LLM_MODEL: "claude-sonnet-4-6"
+# Real deployments: create a `compass-secrets` Secret with
+# COMPASS_ANTHROPIC_API_KEY / COMPASS_OPENAI_API_KEY and switch
+# COMPASS_LLM_PROVIDER above to "anthropic" or "openai".
