@@ -109,14 +109,4 @@ compass/
   metrics, readiness/liveness probes, and a CI pipeline that actually
   gates on tests before building images.
 
-## Ideas for extending it
 
-- Swap the naive chunker for a markdown/AST-aware splitter.
-- Add a `/api/chat/stream` endpoint using server-sent events for
-  token-by-token answers.
-- Swap FAISS for Pinecone/pgvector for a managed, multi-node store.
-- Add an auth layer (JWT) in front of the ingest endpoint.
-
-## License
-
-MIT — use this however is useful to you.
