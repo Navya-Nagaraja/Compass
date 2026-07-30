@@ -11,6 +11,18 @@ retrieval-augmented generation (RAG) service, a React dashboard, CI/CD,
 containerized deployment, and Prometheus/Grafana monitoring, all wired
 together in one repo.
 
+## Overview
+
+Compass is a full-stack AI developer platform that lets engineering
+teams query their own documentation, API specs, and runbooks in
+natural language instead of searching manually. It combines a
+retrieval-augmented generation (RAG) pipeline — local embeddings, FAISS
+vector search, and a swappable LLM layer (Anthropic/OpenAI) — with a
+React dashboard, containerized deployment, CI/CD via GitHub Actions,
+and Prometheus/Grafana monitoring. It runs fully out of the box with
+zero API keys in "mock mode," so anyone can clone it and see the
+entire pipeline working end to end.
+
 ## Why this exists
 
 Most "AI chatbot" demos either hardcode a single document or require an
